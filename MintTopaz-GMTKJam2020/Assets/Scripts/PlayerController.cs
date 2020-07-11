@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
         //add gravity and acceleration to velocity
         velocity.y += gravity * Time.deltaTime;
-        velocity += acceleration * Time.deltaTime;
+        //velocity += acceleration * Time.deltaTime;
 
         //move player in the Y axis
         controller.Move(velocity * Time.deltaTime);
@@ -102,8 +102,8 @@ public class PlayerController : MonoBehaviour
         //decelerate when grounded
         if(isGrounded)
         {
-            velocity.x *= 0.95f;
-            velocity.z *= 0.95f;
+            velocity.x *= 0.98f;
+            velocity.z *= 0.98f;
         }
     }
 
