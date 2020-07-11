@@ -38,6 +38,8 @@ public class ShotgunController : MonoBehaviour
         //allow the player to shoot if they have ammo and the cooldown has ended
         if (Input.GetKeyDown(shotgunKey) && ammoCount > 0 && canShoot)
         {
+            //shake the screen and shoot the shotgun
+            //CameraShake.instance.Shake(50f, 50f, 0.1f);
             Shoot();
             StartCoroutine(Cooldown());
         }
