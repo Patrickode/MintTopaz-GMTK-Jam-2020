@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //static instance of this object
-    public static PlayerController instance;
+    public static PlayerController instance = null;
 
     //character controller component
-    private CharacterController controller;
+    private CharacterController controller = null;
 
     //camera
     [SerializeField]
-    private Transform camera;
+    private Transform cam = null;
 
     //movement variables
     public float moveSpeed = 25f;
@@ -28,13 +28,12 @@ public class PlayerController : MonoBehaviour
 
     //reference to ground-checking object
     [SerializeField]
-    private Transform groundCheck;
+    private Transform groundCheck = null;
     public float checkRadius;
     public LayerMask groundMask;
     public bool isGrounded;
     public bool prevGroundedState;
 
-    // Start is called before the first frame update
     void Start()
     {
         //set up static instance
@@ -50,12 +49,11 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         //check to see if the player is grounded
         isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, groundMask);
-        if(isGrounded && velocity.y <=0)
+        if (isGrounded && velocity.y <= 0)
         {
             velocity.y = -2f;
         }
@@ -69,7 +67,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         //check if SHIFT key is being pressed
-        if(Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             //increase movespeed
             moveSpeed = 40f;
@@ -84,7 +82,7 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         //check for jump
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -100,7 +98,7 @@ public class PlayerController : MonoBehaviour
         prevGroundedState = isGrounded;
 
         //decelerate when grounded
-        if(isGrounded)
+        if (isGrounded)
         {
             velocity.x *= 0.98f;
             velocity.z *= 0.98f;
@@ -114,6 +112,6 @@ public class PlayerController : MonoBehaviour
         velocity.z = 0f;
 
         //apply new force
-        velocity += -camera.transform.forward * knockbackForce;
+        velocity += -cam.transform.forward * knockbackForce;
     }
 }

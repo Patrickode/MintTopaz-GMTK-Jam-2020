@@ -9,20 +9,18 @@ public class CameraController : MonoBehaviour
 
     //player transform
     [SerializeField]
-    private Transform player;
+    private Transform player = null;
 
     //x-axis rotation variable
     private float xRotation = 0f;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         //hide cursor and lock it to the center of the screen
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //get mouse input

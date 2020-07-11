@@ -5,7 +5,7 @@ using UnityEngine;
 public class LavaFlow : MonoBehaviour
 {
     [Tooltip("How fast this object should move, in units per frame.")]
-    [SerializeField] [Range(0, 10)] private float unitsMovedPerFrame = 1;
+    [SerializeField] [Range(0, 10)] private float unitsMovedPerFrame = 1f;
     [Tooltip("Whether to go backwards through the list of waypoints after reaching the end of it. This will " +
         "make the flow loop back and forth indefinitely.")]
     [SerializeField] private bool pingPong = false;

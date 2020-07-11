@@ -14,26 +14,19 @@ public class ShotgunController : MonoBehaviour
 
     //particle system for shotgun blast
     [SerializeField]
-    private ParticleSystem blast;
+    private ParticleSystem blast = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         //allow the player to shoot if they have ammo and the cooldown has ended
-        if(Input.GetKeyDown(KeyCode.Mouse0) && ammoCount > 0 && canShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && ammoCount > 0 && canShoot)
         {
             Shoot();
             StartCoroutine(Cooldown());
         }
 
         //allow the player to reload if they are grounded
-        if(PlayerController.instance.isGrounded && ammoCount < 3)
+        if (PlayerController.instance.isGrounded && ammoCount < 3)
         {
             //reload the shotgun
             Reload();
