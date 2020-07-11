@@ -5123,8 +5123,8 @@ MonoBehaviour:
   camera: {fileID: 1019313813}
   moveSpeed: 12
   jumpHeight: 5
-  knockbackForce: 50
-  gravity: -50
+  knockbackForce: 100
+  gravity: -100
   groundCheck: {fileID: 504438125}
   checkRadius: 0.4
   groundMask:
@@ -5704,7 +5704,7 @@ Transform:
   m_GameObject: {fileID: 1355955068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children:
   - {fileID: 809060665}
   - {fileID: 718358964}

@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     //movement vectors
     private Vector3 velocity;
+    private Vector3 acceleration = Vector3.zero;
 
     //reference to ground-checking object
     [SerializeField]
@@ -88,8 +89,9 @@ public class PlayerController : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        //add gravity to velocity
+        //add gravity and acceleration to velocity
         velocity.y += gravity * Time.deltaTime;
+        velocity += acceleration * Time.deltaTime;
 
         //move player in the Y axis
         controller.Move(velocity * Time.deltaTime);
@@ -97,16 +99,21 @@ public class PlayerController : MonoBehaviour
         //set previous grounded state
         prevGroundedState = isGrounded;
 
+        //decelerate when grounded
+        if(isGrounded)
+        {
+            velocity.x *= 0.95f;
+            velocity.z *= 0.95f;
+        }
     }
 
     public void KnockBack()
     {
-        float startTime = Time.time;
+        //zero out velocity in x and z directions
+        velocity.x = 0f;
+        velocity.z = 0f;
 
-        while(Time.time < startTime + 0.1)
-        {
-            controller.SimpleMove(-camera.transform.forward * knockbackForce * Time.deltaTime);
-        }
-        
+        //apply new force
+        velocity += -camera.transform.forward * knockbackForce;
     }
 }
