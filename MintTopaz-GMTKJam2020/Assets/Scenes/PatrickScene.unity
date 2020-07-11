@@ -453,7 +453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitsMovedPerFrame: 1
-  piRadiansRotatedPerFrame: 1
   pingPong: 0
   waypoints:
   - {fileID: 1867358150}
