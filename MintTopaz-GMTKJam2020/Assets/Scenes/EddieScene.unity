@@ -5395,7 +5395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a955a835ee2cae4ba410c3de2a0ba82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1019313813}
+  cam: {fileID: 1019313813}
   moveSpeed: 12
   jumpHeight: 5
   knockbackForce: 100
