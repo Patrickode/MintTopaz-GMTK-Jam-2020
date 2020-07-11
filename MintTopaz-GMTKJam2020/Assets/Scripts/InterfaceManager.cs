@@ -8,8 +8,11 @@ public class InterfaceManager : MonoBehaviour
     //static instance of this class
     public static InterfaceManager instance;
 
-    //array of bullets
-    private Image[] bullets;
+    //array of left and right shotgun bullets
+    [SerializeField]
+    private Image[] leftBullets;
+    [SerializeField]
+    private Image[] rightBullets;
 
     // Start is called before the first frame update
     void Start()
@@ -29,5 +32,50 @@ public class InterfaceManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void LeftShot()
+    {
+        //remove one shell from the UI
+        foreach(Image bullet in leftBullets)
+        {
+            if(bullet.enabled)
+            {
+                //disable the next bullet and return from the loop
+                bullet.enabled = false;
+                return;
+            }
+        }
+    }
+
+    public void ReloadLeft()
+    {
+        //re-enable bullet images
+        foreach(Image bullet in leftBullets)
+        {
+            bullet.enabled = true;
+        }
+    }
+
+    public void RightShot()
+    {
+        //remove one shell from the UI
+        foreach (Image bullet in rightBullets)
+        {
+            if (bullet.enabled)
+            {
+                //disable the next bullet and return from the loop
+                bullet.enabled = false;
+                return;
+            }
+        }
+    }
+
+    public void ReloadRight()
+    {
+        foreach (Image bullet in rightBullets)
+        {
+            bullet.enabled = true;
+        }
     }
 }

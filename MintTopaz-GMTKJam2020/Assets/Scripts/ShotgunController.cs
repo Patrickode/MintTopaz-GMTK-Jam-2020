@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShotgunController : MonoBehaviour
 {
     //current ammo count
-    private int ammoCount = 3;
+    private int ammoCount = 0;
 
     //cooldown between shots
     [SerializeField]
@@ -16,10 +16,27 @@ public class ShotgunController : MonoBehaviour
     [SerializeField]
     private ParticleSystem blast = null;
 
+    //shotgun determination variables
+    public bool isRightShotgun = true;
+    private KeyCode shotgunKey;
+
+    private void Start()
+    {
+        //check if this is the left or right shotgun and determine which button is used for shooting
+        if(isRightShotgun)
+        {
+            shotgunKey = KeyCode.Mouse1;
+        }
+        else
+        {
+            shotgunKey = KeyCode.Mouse0;
+        }
+    }
+
     void Update()
     {
         //allow the player to shoot if they have ammo and the cooldown has ended
-        if (Input.GetKeyDown(KeyCode.Mouse0) && ammoCount > 0 && canShoot)
+        if (Input.GetKeyDown(shotgunKey) && ammoCount > 0 && canShoot)
         {
             Shoot();
             StartCoroutine(Cooldown());
@@ -43,7 +60,15 @@ public class ShotgunController : MonoBehaviour
         ammoCount--;
         Debug.Log("Shot the gun, ammo left: " + ammoCount);
 
-        //TODO: remove one shell from UI
+        //remove one shell from UI depending on gun placement
+        if(isRightShotgun)
+        {
+            InterfaceManager.instance.RightShot();
+        }
+        else
+        {
+            InterfaceManager.instance.LeftShot();
+        }
 
         //knock player back
         PlayerController.instance.KnockBack();
@@ -56,7 +81,15 @@ public class ShotgunController : MonoBehaviour
 
         Debug.Log("Shotgun reloaded");
 
-        //TODO: reset UI to have 3 shotgun shells
+        //reset UI to have 3 shotgun shells
+        if(isRightShotgun)
+        {
+            InterfaceManager.instance.ReloadRight();
+        }
+        else
+        {
+            InterfaceManager.instance.ReloadLeft();
+        }
     }
 
     public IEnumerator Cooldown()
